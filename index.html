@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hyderabad Grocery Store - Fresh & Quality Groceries</title>
+  
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- GSAP Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    
+  
+</head>
+<body> 
+    <style>  * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-green: #2d7a5e;
+            --light-green: #e8f5e9;
+            --warm-beige: #f9f7f4;
+            --soft-white: #ffffff;
+            --dark-text: #2c3e50;
+            --gray-text: #6b7280;
+            --accent-orange: #ff8c42;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 20px rgba(0,0,0,0.12);
+            --shadow-lg: 0 8px 30px rgba(0,0,0,0.16);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark-text);
+            background-color: var(--warm-beige);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+      
+
+
+        .navbar.scrolled {
+            padding: 0.5rem 0;
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-green), #3d9970);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+        }
+.logo-link {
+    text-decoration: none;
+    color: inherit;      /* keep same color */
+    display: inline-block; /* keeps layout exactly same */
+}
+
+
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--dark-text);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-green);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: var(--primary-green);
+        }
+
+        .nav-menu a:hover::after,
+        .nav-menu a.active::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--dark-text);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            background: linear-gradient(135deg, var(--light-green) 0%, var(--warm-beige) 100%);
+            padding: 6rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--dark-text);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-content .highlight {
+            color: var(--primary-green);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--gray-text);
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--primary-green);
+            color: white;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-primary:hover {
+            background: #246b51;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary-green);
+            border: 2px solid var(--primary-green);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-green);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .hero-image {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Categories Section */
+        .categories {
+            padding: 5rem 2rem;
+            background: var(--soft-white);
+        }
+
+        .section-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark-text);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--gray-text);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .category-image {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .category-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .category-card:hover .category-image img {
+            transform: scale(1.1);
+        }
+
+        .category-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .category-info h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--dark-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .category-info p {
+            color: var(--gray-text);
+            font-size: 0.9rem;
+        }
+
+        /* Products Section */
+        .products {
+            padding: 5rem 2rem;
+            background: var(--warm-beige);
+        }
+
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .filter-btn {
+            padding: 0.8rem 1.5rem;
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            color: var(--gray-text);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--primary-green);
+            color: var(--primary-green);
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active {
+            background: var(--primary-green);
+            color: white;
+            border-color: var(--primary-green);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.4s ease;
+        }
+
+        .product-card.hidden {
+            display: none;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+            background: var(--light-green);
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.15);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--accent-orange);
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .product-badge.fresh {
+            background: #10b981;
+        }
+
+        .product-badge.premium {
+            background: #8b5cf6;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-name {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--dark-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        .product-price .old-price {
+            font-size: 1rem;
+            color: var(--gray-text);
+            text-decoration: line-through;
+            margin-left: 0.5rem;
+            font-weight: 400;
+        }
+
+        .whatsapp-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background: #25d366;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .whatsapp-btn:hover {
+            background: #20ba5a;
+            transform: scale(1.03);
+        }
+
+        /* About Section */
+        .about {
+            padding: 5rem 2rem;
+            background: var(--soft-white);
+        }
+
+        .about-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .about-content h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark-text);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            color: var(--gray-text);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--light-green);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.5rem;
+        }
+
+        .feature-text h4 {
+            font-weight: 600;
+            color: var(--dark-text);
+            margin-bottom: 0.3rem;
+        }
+
+        .feature-text p {
+            font-size: 0.9rem;
+            color: var(--gray-text);
+            margin: 0;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a2a3a;
+            color: white;
+            padding: 3rem 2rem 1.5rem;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--light-green);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #cbd5e0;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.8rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .contact-icon {
+            width: 35px;
+            height: 35px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-size: 1.3rem;
+            transition: all 0.3s ease; 
+             
+        } 
+
+        .social-icon:hover {
+            background: var(--primary-green);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(45, 122, 94, 0.4);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1.5rem;
+            text-align: center;
+            color: #cbd5e0;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 968px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 80px;
+                flex-direction: column;
+                background: white;
+                width: 100%;
+                text-align: center;
+                transition: left 0.3s ease;
+                box-shadow: var(--shadow-md);
+                padding: 2rem 0;
+                gap: 1.5rem;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hero-container,
+            .about-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-image {
+                order: -1;
+            }
+
+            .category-grid,
+            .products-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1.5rem;
+            }
+
+            .features-list {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header h2,
+            .about-content h2 {
+                font-size: 2rem;
+            }
+
+            .filter-tabs {
+                gap: 0.5rem;
+            }
+
+            .filter-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .category-grid,
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+</style>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+          <a href="#home" class="logo-link">
+    <div class="logo">
+        <div class="logo-icon">🛒</div>
+        <span>Hyderabad Grocery</span>
+    </div>
+</a>
+
+            <ul class="nav-menu">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Fresh <span class="highlight">Groceries</span> Delivered to Your Doorstep</h1>
+                <p>Experience premium quality groceries, fresh produce, and daily essentials at unbeatable prices in Hyderabad.</p>
+                <div class="cta-buttons">
+                    <a href="#products" class="btn btn-primary">
+                        🛍️ Shop Now
+                    </a>
+                    <a href="#categories" class="btn btn-secondary">
+                        📋 Browse Categories
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&q=80" alt="Fresh Groceries">
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section id="categories" class="categories">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Shop by Category</h2>
+                <p>Explore our wide range of fresh and quality products</p>
+            </div>
+            <div class="category-grid">
+                <div class="category-card" data-category="fruits">
+                    <div class="category-image">
+                        <img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=600&q=80" alt="Fruits & Vegetables">
+                    </div>
+                    <div class="category-info">
+                        <h3>Fruits & Vegetables</h3>
+                        <p>Farm-fresh produce daily</p>
+                    </div>
+                </div>
+
+                <div class="category-card" data-category="dairy">
+                    <div class="category-image">
+                        <img src="https://images.unsplash.com/photo-1563636619-e9143da7973b?w=600&q=80" alt="Dairy & Bakery">
+                    </div>
+                    <div class="category-info">
+                        <h3>Dairy & Bakery</h3>
+                        <p>Fresh milk, bread & more</p>
+                    </div>
+                </div>
+
+                <div class="category-card" data-category="meat">
+                    <div class="category-image">
+                        <img src="https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=600&q=80" alt="Meat, Fish & Prawns">
+                    </div>
+                    <div class="category-info">
+                        <h3>Meat, Fish & Prawns</h3>
+                        <p>Premium cuts & seafood</p>
+                    </div>
+                </div>
+
+                <div class="category-card" data-category="household">
+                    <div class="category-image">
+                        <img src="./img/plates.jpg" alt="Household Essentials">
+                    </div>
+                    <div class="category-info">
+                        <h3>Household Essentials</h3>
+                        <p>Daily needs for cooking</p>
+                    </div>
+                </div>
+
+                <div class="category-card" data-category="spices">
+                    <div class="category-image">
+                        <img src="./img/spiecs.jpg" alt="Spices & Condiments">
+                    </div>
+                    <div class="category-info">
+                        <h3>Spices & Condiments</h3>
+                        <p>Authentic flavors & masalas</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Featured Products</h2>
+                <p>Hand-picked selections for you</p>
+            </div>
+
+            <!-- Filter Tabs - ALL Categories -->
+            <div class="filter-tabs">
+                <button class="filter-btn active" data-filter="all">🛒 All Products</button>
+                <button class="filter-btn" data-filter="fruits">🥗 Fruits & Vegetables</button>
+                <button class="filter-btn" data-filter="dairy">🥛 Dairy & Bakery</button>
+                <button class="filter-btn" data-filter="chicken">🐔 Chicken</button>
+                <button class="filter-btn" data-filter="mutton">🐏 Mutton</button>
+                <button class="filter-btn" data-filter="fish">🐟 Fish</button>
+                <button class="filter-btn" data-filter="prawns">🦐 Prawns</button>
+                <button class="filter-btn" data-filter="household">🧴 Household</button>
+                <button class="filter-btn" data-filter="spices">🌶️ Spices</button>
+            </div>
+
+            <div class="products-grid">
+                <!-- FRUITS & VEGETABLES -->
+                <div class="product-card" data-category="fruits">
+                    <div class="product-image">
+                        <img src="./img/tomatos.jpg" alt="Fresh Tomatoes">
+                        <span class="product-badge fresh">Fresh</span>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Fresh Tomatoes</h3>
+                        <div class="product-price">₹40/kg</div>
+                        <button class="whatsapp-btn">
+                            📱 Oder From WhatsApp.
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="fruits">
+                    <div class="product-image">
+                        <img src="./img/onion.jpg" alt="Fresh Onions">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Fresh Onions</h3>
+                        <div class="product-price">₹35/kg</div>
+                        <button class="whatsapp-btn">
+                            📱 Oder From  WhatsApp.
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="fruits">
+                    <div class="product-image">
+                        <img src="./img/potatoes.jpg" alt="Fresh Potatoes">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Fresh Potatoes</h3>
+                        <div class="product-price">₹30/kg</div>
+                        <button class="whatsapp-btn">
+                            📱 Oder From WhatsApp.
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="fruits">
+                    <div class="product-image">
+                        <img src="./img/apples.jpg" alt="Fresh Apples">
+                        <span class="product-badge">Popular</span>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Kashmir Apples</h3>
+                        <div class="product-price">₹180/kg</div>
+                        <button class="whatsapp-btn">
+                            📱 Oder From WhatsApp.
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="fruits">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1587132137056-bfbf0166836e?w=400&q=80" alt="Fresh Bananas">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Fresh Bananas</h3>
+                        <div class="product-price">₹50/dozen</div>
+                        <button class="whatsapp-btn">
+                            📱 Oder From WhatsApp.
+                        </button>
+                    </div>
+                </div>
+
+                <!-- DAIRY & BAKERY -->
+                <div class="product-card" data-category="dairy">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1550583724-b2692b85b150?w=400&q=80" alt="Fresh Milk">
+                        <span class="product-badge fresh">Fresh</span>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Fresh Milk (Full Cream)</h3>
+                        <div class="product-price">₹65/liter</div>
+                        <button class="whatsapp-btn">
+                            📱 Oder From WhatsApp.
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="dairy">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=400&q=80" alt="White Bread">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Freshly Baked White Bread</h3>
+                        <div class="product-price">₹40/pack</div>
+                        <button class="whatsapp-btn">
+                            📱 Oder From WhatsApp.
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="dairy">
+                    <div class="product-image">
+                        <img src="./img/butter.jpg" alt="Butter">
+                        <span class="product-badge">Premium</span>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Premium Butter</h3>
+                        <div class="product-price">₹55/100g</div>
+                        <button class="whatsapp-btn">
+                            📱 Oder From  WhatsApp.
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="dairy">
+                    <div class="product-image">
+                        <img src="./img/curd.jpg" alt="Fresh Yogurt">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Fresh Curd (Dahi)</h3>
+                        <div class="product-price">₹60/500g</div>
+                        <button class="whatsapp-btn">
+                            📱 Oder From WhatsApp.
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="dairy">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1452195100486-9cc805987862?w=400&q=80" alt="Paneer">
+                        <span class="product-badge">Popular</span>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Fresh Paneer</h3>
+                        <div class="product-price">₹80/200g</div>
+                        <button class="whatsapp-btn">
+                            📱 Oder From WhatsApp.
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CHICKEN PRODUCTS -->
+                <div class="product-card" data-category="chicken">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1604503468506-a8da13d82791?w=400&q=80" alt="Fresh Chicken Breast">
+                        <span class="product-badge fresh">Fresh</span>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Chicken Breast (Boneless)</h3>
+                        <div class="product-price">₹280/kg <span class="old-price">₹320</span></div>
+                        <button class="whatsapp-btn">
+                            📱 Oder From WhatsApp.
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="chicken">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1587593810167-a84920ea0781?w=400&q=80"" alt="Chicken Curry Cut">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Chicken Curry Cut (with bone)</h3>
+                        <div class="product-price">₹200/kg</div>
+                        <button class="whatsapp-btn">
+                            📱 Oder From WhatsApp.
+                        </button>
+                    </div>
+                </div>
+
+                
+
+                <!-- MUTTON PRODUCTS -->
+                
+
+                <div class="product-card" data-category="mutton">
+                    <div class="product-image">
+                        <img src="./img/mutton (1).jpg" alt="Mutton Boneless">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Mutton Boneless</h3>
+                        <div class="product-price">₹750/kg</div>
+                        <button class="whatsapp-btn">
+                            📱 Oder From  WhatsApp.
+                        </button>
+                    </div>
+                </div>
+
+             
+
+                <!-- FISH PRODUCTS -->
+               
+                <div class="product-card" data-category="fish">
+                    <div class="product-image">
+                        <img src="./img/fish.jpg" alt="Rohu Fish">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Rohu Fish (Curry Cut)</h3>
+                        <div class="product-price">₹280/kg</div>
+                        <button class="whatsapp-btn">
+                            📱 Oder From WhatsApp.
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="fish">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=400&q=80" alt="Salmon">
+                        <span class="product-badge premium">Premium</span>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Norwegian Salmon</h3>
+                        <div class="product-price">₹1200/kg</div>
+                        <button class="whatsapp-btn">
+                            📱 Oder From WhatsApp.
+                        </button>
+                    </div>
+                </div>
+
+                <!-- PRAWNS PRODUCTS -->
+                <div class="product-card" data-category="prawns">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?w=400&q=80" alt="Tiger Prawns">
+                        <span class="product-badge">Best Seller</span>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Tiger Prawns (Large)</h3>
+                        <div class="product-price">₹800/kg <span class="old-price">₹900</span></div>
+                        <button class="whatsapp-btn">
+                            📱 Oder From WhatsApp.
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="prawns">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?w=400&q=80" alt="Medium Prawns">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Medium Prawns</h3>
+                        <div class="product-price">₹550/kg</div>
+                        <button class="whatsapp-btn">
+                            📱 Oder From WhatsApp.
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="prawns">
+                    <div class="product-image">
+                        <img src="./img/prawn (1).jpg" alt="Jumbo Prawns">
+                        <span class="product-badge premium">Premium</span>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Jumbo Prawns</h3>
+                        <div class="product-price">₹1100/kg</div>
+                        <button class="whatsapp-btn">
+                            📱 Oder From WhatsApp.
+                        </button>
+                    </div>
+                </div>
+
+                <!-- HOUSEHOLD ESSENTIALS -->
+                <div class="product-card" data-category="household">
+                    <div class="product-image">
+                        <img src="./img/plates.jpg" alt="Dish Soap">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Paper Plates</h3>
+                        <div class="product-price">₹100/50pc</div>
+                        <button class="whatsapp-btn">
+                            📱 Oder From WhatsApp.
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="household">
+                    <div class="product-image">
+                        <img src="./img/cups (1).jpg" alt="Laundry Detergent">
+                        <span class="product-badge">Popular</span>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Jumbo Cups</h3>
+                        <div class="product-price">₹50/25pc</div>
+                        <button class="whatsapp-btn">
+                            📱 Oder From WhatsApp.
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="household">
+                    <div class="product-image">
+                        <img src="./img/tissue (1).jpg " alt="Toilet Paper">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name"> Tissue Paper</h3>
+                        <div class="product-price">₹180/pack</div>
+                        <button class="whatsapp-btn">
+                            📱 Oder From  WhatsApp.
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="household">
+                    <div class="product-image">
+                        <img src="./img/gloves (1).jpg" alt="Hand Sanitizer">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Hand Gloves</h3>
+                        <div class="product-price">₹30/2pc</div>
+                        <button class="whatsapp-btn">
+                            📱 Oder From  WhatsApp.
+                        </button>
+                    </div>
+                </div>
+
+                <!-- SPICES & CONDIMENTS -->
+                <div class="product-card" data-category="spices">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1607672632458-9eb56696346b?w=400&q=80" alt="Red Chilli Powder">
+                        <span class="product-badge">Authentic</span>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Red Chilli Powder</h3>
+                        <div class="product-price">₹140/200g</div>
+                        <button class="whatsapp-btn">
+                            📱 Oder From WhatsApp.
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="spices">
+                    <div class="product-image">
+                        <img src="./img/haldi (1).jpg " alt="Turmeric Powder">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Turmeric Powder (Haldi)</h3>
+                        <div class="product-price">₹120/200g</div>
+                        <button class="whatsapp-btn">
+                            📱 Oder From WhatsApp.
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="spices">
+                    <div class="product-image">
+                        <img src="./img/garam masala (1).jpg" alt="Garam Masala">
+                        <span class="product-badge premium">Premium</span>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Garam Masala</h3>
+                        <div class="product-price">₹180/100g</div>
+                        <button class="whatsapp-btn">
+                            📱 Oder From  WhatsApp.
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="spices">
+                    <div class="product-image">
+                        <img src="./img/coriyander (1).jpg" alt="Coriander Powder">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Coriander Powder (Dhaniya)</h3>
+                        <div class="product-price">₹90/200g</div>
+                        <button class="whatsapp-btn">
+                            📱 Oder From  WhatsApp.
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="spices">
+                    <div class="product-image">
+                        <img src="./img/jeera.jpg" alt="Cumin Seeds">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Cumin Seeds (Jeera)</h3>
+                        <div class="product-price">₹160/200g</div>
+                        <button class="whatsapp-btn">
+                            📱 Oder From WhatsApp.
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="about-container">
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=800&q=80" alt="About Hyderabad Grocery">
+            </div>
+            <div class="about-content">
+                <h2>Why Choose Hyderabad Grocery?</h2>
+                <p>Since the begining, we've been serving Hyderabad with the freshest groceries, premium quality products, and exceptional customer service. Our commitment is to bring farm-fresh produce and quality essentials right to your doorstep.</p>
+                <p>We source directly from local farmers and trusted suppliers to ensure you get the best quality at competitive prices.</p>
+                
+                <div class="features-list">
+                    <div class="feature-item">
+                        <div class="feature-icon">🌱</div>
+                        <div class="feature-text">
+                            <h4>100% Fresh</h4>
+                            <p>Farm-fresh daily</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🚚</div>
+                        <div class="feature-text">
+                            <h4>Fast Delivery</h4>
+                            <p>Same-day delivery</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">💰</div>
+                        <div class="feature-text">
+                            <h4>Best Prices</h4>
+                            <p>Competitive rates</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">⭐</div>
+                        <div class="feature-text">
+                            <h4>Quality Assured</h4>
+                            <p>Premium selection</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Hyderabad Grocery</h3>
+                <p>Your trusted partner for fresh groceries and daily essentials since a long time.</p>
+                <div class="social-links"> 
+
+                     <div style="text-align: center;">
+  <a href="#" class="social-icon" aria-label="Instagram">
+    
+                   <i class="fa-brands fa-facebook"></i>
+  </a>
+</div>
+                   
+      <div style="text-align: center;">
+  <a href="https://www.instagram.com/hyderabad_grocery_store?igsh=YXo1eXY4dHR4Mmdm" class="social-icon" aria-label="Instagram">
+    <i class="fa-brands fa-instagram"></i>
+  </a>
+</div> 
+   <div style="text-align: center;">
+  <a href="http://wa.me/918333015245" class="social-icon" aria-label="Instagram">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+</div>
+                     
+ <div style="text-align: center;">
+  <a href="#" class="social-icon" aria-label="Instagram">
+      <i class="fa-brands fa-twitter"></i>
+  </a>
+</div>
+       
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#home">Home</a>
+                <a href="#categories">Categories</a>
+                <a href="#products">Products</a>
+                <a href="#about">About Us</a>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <p><strong>Address</strong></p>
+                            <p>Moula Ali, Secunderabad<br>Hyderabad, Telangana - 500056</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div>
+                            <p><strong>Phone</strong></p>
+                            <p>+91 83330 15245</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Store Hours</h3>
+                <p><strong>Monday - Saturday</strong></p>
+                <p>7:00 AM - 10:00 PM</p>
+                <p style="margin-top: 1rem;"><strong>Sunday</strong></p>
+                <p>8:00 AM - 9:00 PM</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Hyderabad Grocery Store. All rights reserved. | Designed &amp; Developed Khan Developers</p>
+        </div>
+    </footer>
+
+<script>
+      // Wait for page load
+        window.addEventListener('load', function() {
+            
+            // GSAP Animations (only if loaded)
+            if (typeof gsap !== 'undefined') {
+                gsap.registerPlugin(ScrollTrigger);
+
+                // Hero animations
+                gsap.from('.hero-content h1', {
+                    opacity: 0,
+                    y: 50,
+                    duration: 1,
+                    ease: 'power3.out'
+                });
+
+                gsap.from('.hero-content p', {
+                    opacity: 0,
+                    y: 30,
+                    duration: 1,
+                    delay: 0.3,
+                    ease: 'power3.out'
+                });
+
+                gsap.from('.cta-buttons', {
+                    opacity: 0,
+                    y: 30,
+                    duration: 1,
+                    delay: 0.5,
+                    ease: 'power3.out'
+                });
+
+                gsap.from('.hero-image img', {
+                    opacity: 0,
+                    scale: 0.8,
+                    duration: 1.2,
+                    delay: 0.4,
+                    ease: 'power3.out'
+                });
+
+                // Category cards scroll animation
+                gsap.utils.toArray('.category-card').forEach((card, index) => {
+                    gsap.from(card, {
+                        scrollTrigger: {
+                            trigger: card,
+                            start: 'top 85%',
+                            toggleActions: 'play none none reverse'
+                        },
+                        opacity: 0,
+                        y: 60,
+                        duration: 0.8,
+                        delay: index * 0.1,
+                        ease: 'power3.out'
+                    });
+                });
+
+                // Product cards scroll animation
+                gsap.utils.toArray('.product-card').forEach((card, index) => {
+                    gsap.from(card, {
+                        scrollTrigger: {
+                            trigger: card,
+                            start: 'top 90%',
+                            toggleActions: 'play none none reverse'
+                        },
+                        opacity: 0,
+                        y: 50,
+                        duration: 0.7,
+                        delay: index * 0.05,
+                        ease: 'power2.out'
+                    });
+                });
+            }
+        });
+
+        // Sticky Navbar
+        const navbar = document.querySelector('.navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Hamburger Menu
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu on link click
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Active Navigation
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-menu a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // ============= PRODUCT FILTERING =============
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const productCards = document.querySelectorAll('.product-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active button
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filterValue = btn.getAttribute('data-filter');
+
+                // GSAP animation for filtering
+                if (typeof gsap !== 'undefined') {
+                    gsap.to(productCards, {
+                        opacity: 0,
+                        scale: 0.8,
+                        duration: 0.3,
+                        stagger: 0.02,
+                        ease: 'power2.in',
+                        onComplete: () => {
+                            // Show/hide products based on filter
+                            productCards.forEach(card => {
+                                const category = card.getAttribute('data-category');
+                                if (filterValue === 'all' || category === filterValue) {
+                                    card.style.display = 'block';
+                                } else {
+                                    card.style.display = 'none';
+                                }
+                            });
+
+                            // Animate visible cards
+                            const visibleCards = Array.from(productCards).filter(
+                                card => card.style.display !== 'none'
+                            );
+                            
+                            gsap.fromTo(visibleCards,
+                                { opacity: 0, scale: 0.8, y: 30 },
+                                {
+                                    opacity: 1,
+                                    scale: 1,
+                                    y: 0,
+                                    duration: 0.5,
+                                    stagger: 0.05,
+                                    ease: 'power2.out'
+                                }
+                            );
+                        }
+                    });
+                } else {
+                    // Fallback without GSAP
+                    productCards.forEach(card => {
+                        const category = card.getAttribute('data-category');
+                        if (filterValue === 'all' || category === filterValue) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        });
+
+        // WhatsApp Integration
+        document.querySelectorAll('.whatsapp-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const whatsappNumber = '918333015245'; 
+                const productName = this.closest('.product-info').querySelector('.product-name').textContent;
+                const productPrice = this.closest('.product-info').querySelector('.product-price').textContent.split(' ')[0];
+                const message = `Hi! I'm interested in:\n\n📦 ${productName}\n💰 ${productPrice}\n\nPlease send me more details.`;
+                const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+                window.open(whatsappURL, '_blank');
+            });
+        });
+
+        // Category Card Click - Scroll to Products
+        document.querySelectorAll('.category-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const category = this.getAttribute('data-category');
+                
+                // Scroll to products section
+                document.querySelector('#products').scrollIntoView({ 
+                    behavior: 'smooth' 
+                });
+
+                // Auto-select the category filter after scroll
+                setTimeout(() => {
+                    const categoryBtn = document.querySelector(`[data-filter="${category}"]`);
+                    if (categoryBtn) {
+                        categoryBtn.click();
+                    }
+                }, 800);
+            });
+        });
+ 
+</script>
+</body>
+</html>
